@@ -6,7 +6,7 @@ from algs.linked_list_node import LinkedListNode
 
 def test_linked_list_can_be_created_with_proper_parameters():
     result = LinkedList()
-    assert result.get_head() == None
+    assert result.get_head() is None
 
 
 def test_linked_list_can_set_and_get_head():
@@ -47,6 +47,7 @@ def test_linked_list_insert_raises_exception_when_index_too_high():
     new_node = LinkedListNode(6, None, None)
     with pytest.raises(Exception):
         linked_list.insert(4, new_node)
+
 
 def test_linked_list_insert_adds_node_to_front_with_index_zero():
     node1 = LinkedListNode(2, None, None)
@@ -131,4 +132,4 @@ def test_linked_list_delete_removes_node_at_end_of_list():
     linked_list = LinkedList()
     linked_list.set_head(node1)
     linked_list.delete(2)
-    assert node2.get_next() == None
+    assert node2.get_next() is None

@@ -5,8 +5,8 @@ from algs.array import Array
 
 def test_array_can_be_created_with_proper_parameters():
     result = Array(10, int)
-    assert result.size == 10
-    assert result.type == int
+    assert result.get_size() == 10
+    assert result.get_type() == int
 
 
 def test_raises_exception_with_invalid_insert_index():
@@ -18,7 +18,7 @@ def test_raises_exception_with_invalid_insert_index():
 def test_insert_adds_to_array_at_proper_index():
     array = Array(10, int)
     array.insert(4, 23)
-    assert array.arrayItems[4] == 23
+    assert array.get_array_items()[4] == 23
 
 
 def test_raises_exception_with_invalid_delete_index():
@@ -33,9 +33,9 @@ def test_deletes_value_from_array():
     array.insert(2, 6)
     array.insert(3, 7)
     array.delete(2)
-    assert array.arrayItems[1] == 5
-    assert array.arrayItems[2] == 7
-    assert array.arrayItems[3] == 0
+    assert array.get_array_items()[1] == 5
+    assert array.get_array_items()[2] == 7
+    assert array.get_array_items()[3] == 0
 
 
 def test_search_returns_value_when_present():

@@ -4,6 +4,15 @@ class Array(object):
         self.arrayItems = [array_type(0)] * size  # initialize array with zeroes in all indexes
         self.type = array_type
 
+    def get_size(self):
+        return self.size
+
+    def get_array_items(self):
+        return self.arrayItems
+
+    def get_type(self):
+        return self.type
+
     def insert(self, position, value):
         if self.size < position:
             raise Exception('Could not insert. Array size is ' + str(self.size))
