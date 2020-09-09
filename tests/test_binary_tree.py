@@ -119,3 +119,20 @@ def test_search_returns_appropriate_node_to_right():
     tree.insert_node(new_node)
     result = tree.search(6)
     assert result == new_node
+
+def test_delete_node_deletes_a_node_with_no_children_left():
+    root_node = BinaryTreeNode(5)
+    child_node = BinaryTreeNode(3)
+    tree = BinaryTree(root_node)
+    tree.insert_node(child_node)
+    tree.delete_node(3)
+    assert root_node.get_left() == None
+
+
+def test_delete_node_deletes_a_node_with_no_children_right():
+    root_node = BinaryTreeNode(5)
+    child_node = BinaryTreeNode(7)
+    tree = BinaryTree(root_node)
+    tree.insert_node(child_node)
+    tree.delete_node(7)
+    assert root_node.get_right() == None

@@ -32,10 +32,10 @@ class BinaryTree(object):
     def insert_node(self, new_node, current_node=None):
         if self.root is None:
             self.root = new_node
-
+            return
         else:
             if current_node is None:
-                current_node = self.root
+                current_node = self.get_root()
             if new_node.get_value() < current_node.get_value():
                 if current_node.get_left() is None:
                     current_node.set_left(new_node)
@@ -54,3 +54,27 @@ class BinaryTree(object):
                     current_node = current_node.get_right()
                     self.insert_node(new_node, current_node)
                     return
+
+    def delete_node(self, value, current_node = None):
+        if current_node == None:
+            current_node = self.search(value)
+
+        if current_node.get_value() == self.get_root().get_value():
+            parent_node = self.get_root()
+        else:
+            parent_node = current_node.get_parent()
+
+        # No Children
+        if current_node.get_left() == None and current_node.get_right() == None:
+            if value <= parent_node.get_value():
+                parent_node.set_left(None)
+            else:
+                parent_node.set_right(None)
+
+        # Single Left NOde
+
+
+        # Single Right Node
+
+
+        # Two Children
