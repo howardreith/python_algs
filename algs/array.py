@@ -1,17 +1,13 @@
 class Array(object):
-    def __init__(self, size, array_type=int):
-        self.size = len(list(map(array_type, range(size))))
-        self.arrayItems = [array_type(0)] * size  # initialize array with zeroes in all indexes
-        self.type = array_type
+    def __init__(self, size):
+        self.size = size
+        self.arrayItems = [0] * size  # initialize array with zeroes in all indexes
 
     def get_size(self):
         return self.size
 
     def get_array_items(self):
         return self.arrayItems
-
-    def get_type(self):
-        return self.type
 
     def insert(self, position, value):
         if self.size < position:
@@ -31,7 +27,6 @@ class Array(object):
             self.arrayItems[position + 1] = 0
 
     def search(self, value):
-        print(self.size)
         for i in range(self.size):
             if self.arrayItems[i] == value:
                 return i
