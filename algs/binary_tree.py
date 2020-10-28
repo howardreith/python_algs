@@ -9,26 +9,23 @@ class BinaryTree(object):
         if current_node is None:
             current_node = self.root
 
-        if self.get_root().get_value() == value:
-            print("Value is at root")
-            return self.get_root()
-
+        if current_node.get_value() == value:
+            print('Value is present in tree')
+            return current_node
+        elif value < current_node.get_value() and current_node.get_left() is not None:
+            print("Move Left")
+            current_node = current_node.get_left()
+            return self.search(value, current_node)
+        elif value > current_node.get_value() and current_node.get_right() is not None:
+            print("Move Right")
+            current_node = current_node.get_right()
+            return self.search(value, current_node)
         else:
-            if current_node.get_value() == value:
-                print('Value is present in tree')
-                return current_node
-            elif value < current_node.get_value() and current_node.get_left() is not None:
-                print("Move Left")
-                current_node = current_node.get_left()
-                return self.search(value, current_node)
-            elif value > current_node.get_value() and current_node.get_right() is not None:
-                print("Move Right")
-                current_node = current_node.get_right()
-                return self.search(value, current_node)
-            else:
-                print("Key is not present in tree")
-                return None
+            print("Key is not present in tree")
+            return None
 
+    # Null object pattern
+    # Consider a traverse function that all these guys use
     def insert_node(self, new_node, current_node=None):
         if self.root is None:
             self.root = new_node

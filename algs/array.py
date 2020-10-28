@@ -22,7 +22,6 @@ class Array(object):
             raise Exception('Could not delete. Array size is ' + str(self.size))
         else:
             for i in range(position, self.size - 1):
-                print('I ran ' + str(i))
                 self.arrayItems[i] = self.arrayItems[i + 1]
             self.arrayItems[position + 1] = 0
 
