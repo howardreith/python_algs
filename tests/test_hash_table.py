@@ -8,7 +8,6 @@ def test_hash_table_can_be_created_with_proper_parameters():
     assert result.data == [[], [], [], [], [], [], [], [], [], []]
     assert result.size == 10
     assert result.max_size == 110
-    assert result.keys == []
 
 
 def test_put_adds_key_value_pair():

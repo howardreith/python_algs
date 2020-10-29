@@ -1,5 +1,8 @@
+def default_priority_function(item1, item2):
+    return item1 - item2
+
 class Heap(object):
-    def __init__(self, size, priority_function):
+    def __init__(self, size, priority_function=default_priority_function):
         self.size = size
         self.items = [None] * (size + 1)
         self.priorityFunction = priority_function
