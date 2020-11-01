@@ -17,6 +17,7 @@ def test_put_adds_key_value_pair():
     expected_kvp = {'banana': 'strawberry'}
     assert hash_table.data[1][0] == expected_kvp
 
+
 def test_put_adds_multiple_key_value_pairs():
     hash_function = hash_djb2
     hash_table = HashTable(10, hash_function)
@@ -27,6 +28,7 @@ def test_put_adds_multiple_key_value_pairs():
     expected_kvp = {'blueberry': 'apple'}
     assert hash_table.data[3][0] == expected_kvp
 
+
 def test_put_overrides_key_value_pair():
     hash_function = hash_djb2
     hash_table = HashTable(10, hash_function)
@@ -35,11 +37,13 @@ def test_put_overrides_key_value_pair():
     expected_kvp = {'banana': 'blueberry'}
     assert hash_table.data[1][0] == expected_kvp
 
+
 def test_get_returns_no_item_message_with_no_item():
     hash_function = hash_djb2
     hash_table = HashTable(10, hash_function)
     result = hash_table.get('StarWars')
     assert result == 'No item found at key StarWars'
+
 
 def test_get_returns_value():
     hash_function = hash_djb2
@@ -48,11 +52,13 @@ def test_get_returns_value():
     result = hash_table.get('banana')
     assert result == 'strawberry'
 
+
 def test_remove_returns_no_item_message_with_no_item():
     hash_function = hash_djb2
     hash_table = HashTable(10, hash_function)
     result = hash_table.remove('StarWars')
     assert result == 'No item found at key StarWars'
+
 
 def test_remove_deletes_value_at_key():
     hash_function = hash_djb2

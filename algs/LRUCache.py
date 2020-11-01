@@ -1,6 +1,8 @@
 from algs.hash_table import HashTable
 from algs.hashes import hash_djb2
 
+# Least recently accessed, not least recently inserted. D'oh.
+# Heap - reprioritize when you insert, pop off the top when over 50
 
 class LRUCache(object):
     def __init__(self):
