@@ -1,10 +1,6 @@
 from algs.romeo_and_juliet import RomeoAndJuliet
 
-text = open('../romeojuliet.txt')
-
-
-def test_romeo_juliet_txt_is_present():
-    print(text)
+text = open('../txt_files/romeojuliet.txt')
 
 
 def test_rome_and_juliet_parses_text():

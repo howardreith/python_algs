@@ -48,12 +48,16 @@ class RomeoAndJuliet(object):
             index2 = find_index_of_object_with_value(disjoint_set.data, parsed_pair[1])
             disjoint_set.union(disjoint_set.data[index1], disjoint_set.data[index2])
 
-        print("\n")
-        print("***************************************************************")
-        for datum in disjoint_set.data:
-            if (datum['parent']['name'] != datum['name']):
-                print(datum['name'] + " : " + datum['parent']['name'])
-            else:
-                print(datum['name'])
-        print("***************************************************************")
+        # do a group by
+        # Hash table - one entry for each parent, and when you encounter an entry in
+        # that group, concatenate their names together.
+
+        # print("\n")
+        # print("***************************************************************")
+        # for datum in disjoint_set.data:
+        #     if (datum['parent']['name'] != datum['name']):
+        #         print(datum['name'] + " : " + datum['parent']['name'])
+        #     else:
+        #         print(datum['name'])
+        # print("***************************************************************")
         self.set = disjoint_set.data
