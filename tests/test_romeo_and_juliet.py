@@ -1,10 +1,12 @@
+import copy
+
 from algs.romeo_and_juliet import RomeoAndJuliet
 
-text = open('../txt_files/romeojuliet.txt')
+text = open('C:/programming/workspace/python_algs/tests/txt_files/romeojuliet.txt')
 
 
 def test_rome_and_juliet_parses_text():
-    rj = RomeoAndJuliet(text)
+    rj = RomeoAndJuliet(copy.deepcopy(text))
     expected_characters = ['Lord Montague', 'Lady Montague', 'Lady Capulet', 'Lord Capulet', 'Friar John', 'Apothecary',
                            'Nurse', 'Friar Laurence', 'Benvolio', 'Prince', 'Paris', 'Juliet', 'Tybalt', 'Romeo',
                            'Mercutio']
@@ -15,7 +17,7 @@ def test_rome_and_juliet_parses_text():
 
 
 def test_romeo_and_juliet_creates_and_prints_union_finds():
-    rj = RomeoAndJuliet(text)
+    rj = RomeoAndJuliet(copy.deepcopy(text))
     rj.create_union_finds_for_chars()
     assert rj.set[0]['name'] == 'Mercutio'
     assert rj.set[0]['rank'] == 0

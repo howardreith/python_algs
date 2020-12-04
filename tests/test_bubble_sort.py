@@ -63,7 +63,6 @@ def test_bubble_sort_sorts_with_odds_ascending_evens_descending():
 
 def test_bubble_sort_sorts_parsed_text_file_with_odd_event_comparator():
     parsed_text = parse_txt_file(text)
-    print(parsed_text)
     bubble_sort(parsed_text, odd_even_comparator)
     first_ten = parsed_text[:10]
     last_ten = parsed_text[-10:]
