@@ -1,17 +1,9 @@
 import random
 
 from algs.bubble_sort import bubble_sort, parse_txt_file
+from algs.comparators import sort_in_ascending
 
 text = open('../txt_files/sort.txt')
-
-
-def comparator(a, b):
-    if a > b:
-        return 1
-    elif b > a:
-        return -1
-    else:
-        return 0
 
 
 def odd_even_comparator(a, b):
@@ -28,7 +20,7 @@ def odd_even_comparator(a, b):
 
 def test_bubble_sort_sorts_array_of_numbers():
     array = [1, 5, 3, 2, 7]
-    bubble_sort(array, comparator)
+    bubble_sort(array, sort_in_ascending)
     assert array == [1, 2, 3, 5, 7]
 
 
@@ -36,13 +28,13 @@ def test_bubble_sort_sorts_a_random_list_of_numbers():
     array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     random.shuffle(array)
-    bubble_sort(array, comparator)
+    bubble_sort(array, sort_in_ascending)
     assert array == expected
 
 
 def test_bubble_sort_sorts_array_of_strings():
     array = ["cat", "dog", "bird", "fish", "snake"]
-    bubble_sort(array, comparator)
+    bubble_sort(array, sort_in_ascending)
     assert array == ["bird", "cat", "dog", "fish", "snake"]
 
 
@@ -50,7 +42,7 @@ def test_bubble_sort_sorts_a_random_list_of_strings():
     array = ["bird", "cat", "dog", "fish", "octopus", "snake"]
     expected = ["bird", "cat", "dog", "fish", "octopus", "snake"]
     random.shuffle(array)
-    bubble_sort(array, comparator)
+    bubble_sort(array, sort_in_ascending)
     assert array == expected
 
 
