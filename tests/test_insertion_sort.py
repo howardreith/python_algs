@@ -1,18 +1,30 @@
 import random
 
 from algs.comparators import sort_in_ascending, sort_in_descending
-from algs.insertion_sort import insertion_sort, parse_text, update_score_tracker, print_top_ten
+from algs.insertion_sort import insertion_sort_wrong, parse_text, update_score_tracker, print_top_ten, insertion_sort
 
 text = open('../txt_files/super_sport.txt')
 
 
 def test_insertion_sort_sorts_a_short_list_of_numbers():
     array = [5, 3, 7]
+    result = insertion_sort_wrong(array, sort_in_ascending)
+    assert result == [3, 5, 7]
+
+
+def test_insertion_correct_sort_sorts_a_short_list_of_numbers():
+    array = [5, 3, 7]
     result = insertion_sort(array, sort_in_ascending)
     assert result == [3, 5, 7]
 
 
 def test_insertion_sort_sorts_a_list_of_numbers():
+    array = [5, 6, 4, 3, 8, 7]
+    result = insertion_sort_wrong(array, sort_in_ascending)
+    assert result == [3, 4, 5, 6, 7, 8]
+
+
+def test_insertion_sort_correct_sorts_a_list_of_numbers():
     array = [5, 6, 4, 3, 8, 7]
     result = insertion_sort(array, sort_in_ascending)
     assert result == [3, 4, 5, 6, 7, 8]
@@ -22,11 +34,25 @@ def test_insertion_sort_sorts_a_random_list_of_numbers():
     array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     random.shuffle(array)
+    result = insertion_sort_wrong(array, sort_in_ascending)
+    assert result == expected
+
+
+def test_insertion_sort_correct_sorts_a_random_list_of_numbers():
+    array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    random.shuffle(array)
     result = insertion_sort(array, sort_in_ascending)
     assert result == expected
 
 
 def test_insertion_sort_sorts_array_of_strings():
+    array = ["cat", "dog", "bird", "fish", "snake"]
+    result = insertion_sort_wrong(array, sort_in_ascending)
+    assert result == ["bird", "cat", "dog", "fish", "snake"]
+
+
+def test_insertion_sort_correct_sorts_array_of_strings():
     array = ["cat", "dog", "bird", "fish", "snake"]
     result = insertion_sort(array, sort_in_ascending)
     assert result == ["bird", "cat", "dog", "fish", "snake"]
@@ -36,11 +62,25 @@ def test_insertion_sort_sorts_a_random_list_of_strings():
     array = ["bird", "cat", "dog", "fish", "octopus", "snake"]
     expected = ["bird", "cat", "dog", "fish", "octopus", "snake"]
     random.shuffle(array)
+    result = insertion_sort_wrong(array, sort_in_ascending)
+    assert result == expected
+
+
+def test_insertion_sort_correct_sorts_a_random_list_of_strings():
+    array = ["bird", "cat", "dog", "fish", "octopus", "snake"]
+    expected = ["bird", "cat", "dog", "fish", "octopus", "snake"]
+    random.shuffle(array)
     result = insertion_sort(array, sort_in_ascending)
     assert result == expected
 
 
 def test_insertion_sort_sorts_a_list_of_numbers_descending():
+    array = [5, 6, 4, 3, 8, 7]
+    result = insertion_sort_wrong(array, sort_in_descending)
+    assert result == [8, 7, 6, 5, 4, 3]
+
+
+def test_insertion_sort_correct_sorts_a_list_of_numbers_descending():
     array = [5, 6, 4, 3, 8, 7]
     result = insertion_sort(array, sort_in_descending)
     assert result == [8, 7, 6, 5, 4, 3]

@@ -1,7 +1,7 @@
 from algs.comparators import sort_in_ascending
 
 
-def insertion_sort(array, sorting_strategy):
+def insertion_sort_wrong(array, sorting_strategy):
     sorted_list = []
     sorted_list.insert(0, array[0])
     for i in range(1, len(array), 1):
@@ -18,6 +18,20 @@ def insertion_sort(array, sorting_strategy):
                     sorted_list.append(array[i])
                     break
     return sorted_list
+
+
+def insertion_sort(array, sorting_strategy):
+    for i in range(1, len(array)):
+        current = array[i]
+        position = i
+        for j in reversed(range(i)):
+            result = sorting_strategy(array[j], current)
+            if result <= 0:
+                break
+            array[position] = array[position - 1]
+            position = position - 1
+        array[position] = current
+    return array
 
 
 def parse_text(text):
