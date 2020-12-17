@@ -1,10 +1,14 @@
-def merge_sort(array, strategy):
+def merge_sort(array, strategy, track=None):
     if len(array) == 1:
         return array
 
     middle = round(len(array) / 2)
-    left = merge_sort(array[:middle], strategy)
-    right = merge_sort(array[middle:], strategy)
+    if track:
+        left = merge_sort(array[:middle], strategy, track)
+        right = merge_sort(array[middle:], strategy, track)
+    else:
+        left = merge_sort(array[:middle], strategy)
+        right = merge_sort(array[middle:], strategy)
 
     if not len(left) or not len(right):
         return left or right
@@ -13,7 +17,10 @@ def merge_sort(array, strategy):
     i, j = 0, 0
 
     while len(result) < len(left) + len(right):
-        comparator_result = strategy(left[i], right[j])
+        if track:
+            comparator_result = strategy(left[i], right[j], track)
+        else:
+            comparator_result = strategy(left[i], right[j])
         if comparator_result < 0:
             result.append(left[i])
             i += 1
@@ -32,4 +39,3 @@ def parse_text(text):
         lines[i] = lines[i].replace('\n', '')
         lines[i] = int(lines[i])
     return lines
-
