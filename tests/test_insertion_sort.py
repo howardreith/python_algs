@@ -1,10 +1,11 @@
 import random
 
-from algs.comparators import sort_in_ascending, sort_in_descending
+from algs.bubble_sort import parse_txt_file
+from algs.comparators import sort_in_ascending, sort_in_descending, sort_ascending_while_tracking
 from algs.insertion_sort import insertion_sort_wrong, parse_text, update_score_tracker, print_top_ten, insertion_sort
 
 text = open('../txt_files/super_sport.txt')
-
+lotsa_numbers = open('../txt_files/to_merge.txt')
 
 def test_insertion_sort_sorts_a_short_list_of_numbers():
     array = [5, 3, 7]
@@ -107,3 +108,10 @@ def test_print_top_10_prints_the_top_10_with_text_file():
     results = parse_text(text)
     update_score_tracker(score_tracker, results)
     print_top_ten(score_tracker)
+
+
+def test_insertion_sort_has_right_number_of_comparisons():
+    track = {'comparisons': 0, "copies": 0}
+    array = parse_txt_file(lotsa_numbers)
+    insertion_sort(array, sort_ascending_while_tracking, track)
+    assert track['comparisons'] == 23958117

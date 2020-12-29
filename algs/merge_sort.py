@@ -1,7 +1,6 @@
 def merge_sort(array, strategy, track=None):
     if len(array) == 1:
         return array
-
     middle = round(len(array) / 2)
     if track:
         left = merge_sort(array[:middle], strategy, track)

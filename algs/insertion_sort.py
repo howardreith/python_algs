@@ -20,12 +20,15 @@ def insertion_sort_wrong(array, sorting_strategy):
     return sorted_list
 
 
-def insertion_sort(array, sorting_strategy):
+def insertion_sort(array, sorting_strategy, track=None):
     for i in range(1, len(array)):
         current = array[i]
         position = i
         for j in reversed(range(i)):
-            result = sorting_strategy(array[j], current)
+            if track:
+                result = sorting_strategy(array[j], current, track)
+            else:
+                result = sorting_strategy(array[j], current)
             if result <= 0:
                 break
             array[position] = array[position - 1]

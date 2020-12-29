@@ -68,7 +68,7 @@ def test_merge_sort_sorts_the_challenge_list():
                             9996, 9997, 9998, 9999, 10000]
 
 
-def test_merge_sort_is_efficient():
+def test_merge_sort_has_right_number_of_comparisons():
     track = {'comparisons': 0}
     array = parse_text(text)
     result = merge_sort(array, sort_ascending_while_tracking, track)

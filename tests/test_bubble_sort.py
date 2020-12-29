@@ -1,10 +1,10 @@
 import random
 
 from algs.bubble_sort import bubble_sort, parse_txt_file
-from algs.comparators import sort_in_ascending
+from algs.comparators import sort_in_ascending, sort_ascending_while_tracking
 
 text = open('../txt_files/sort.txt')
-
+lotsa_numbers = open('../txt_files/to_merge.txt')
 
 def odd_even_comparator(a, b):
     a_is_even = a % 2 == 0
@@ -60,3 +60,10 @@ def test_bubble_sort_sorts_parsed_text_file_with_odd_event_comparator():
     last_ten = parsed_text[-10:]
     assert first_ten == [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
     assert last_ten == [9982, 9984, 9986, 9988, 9990, 9992, 9994, 9996, 9998, 10000]
+
+
+def test_bubble_sort_has_right_number_of_comparisons():
+    track = {'comparisons': 0, "copies": 0}
+    array = parse_txt_file(lotsa_numbers)
+    bubble_sort(array, sort_ascending_while_tracking, track)
+    assert track['comparisons'] == 49988559
