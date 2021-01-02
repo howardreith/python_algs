@@ -1,7 +1,10 @@
+from math import floor
+
+
 def merge_sort(array, strategy, track=None):
     if len(array) == 1:
         return array
-    middle = round(len(array) / 2)
+    middle = floor((len(array) / 2))
     if track:
         left = merge_sort(array[:middle], strategy, track)
         right = merge_sort(array[middle:], strategy, track)
@@ -25,9 +28,16 @@ def merge_sort(array, strategy, track=None):
             i += 1
         else:
             result.append(right[j])
+            if (track):
+                track['copies'] = track['copies'] + 1
             j += 1
         if i == len(left) or j == len(right):
             result.extend(left[i:] or right[j:])
+            if (track):
+                if not left[i:]:
+                    track['copies'] = track['copies'] + len(right)
+                else:
+                    track['copies'] = track['copies'] + len(left)
             break
     return result
 

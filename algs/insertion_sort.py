@@ -32,6 +32,8 @@ def insertion_sort(array, sorting_strategy, track=None):
             if result <= 0:
                 break
             array[position] = array[position - 1]
+            if (track):
+                track['copies'] = track['copies'] + 1
             position = position - 1
         array[position] = current
     return array

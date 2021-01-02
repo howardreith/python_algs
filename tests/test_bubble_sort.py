@@ -67,3 +67,4 @@ def test_bubble_sort_has_right_number_of_comparisons():
     array = parse_txt_file(lotsa_numbers)
     bubble_sort(array, sort_ascending_while_tracking, track)
     assert track['comparisons'] == 49988559
+    assert track['copies'] == 71844390

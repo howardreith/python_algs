@@ -11,6 +11,8 @@ def bubble_sort(array, sorting_strategy, track=None):
             if result > 0:
                 array[i], array[i + 1] = array[i + 1], array[i]
                 has_swapped = True
+                if (track):
+                    track['copies'] = track['copies'] + 3
         unsorted_to = unsorted_to - 1
 
 

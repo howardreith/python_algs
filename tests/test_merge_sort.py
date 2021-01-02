@@ -69,10 +69,11 @@ def test_merge_sort_sorts_the_challenge_list():
 
 
 def test_merge_sort_has_right_number_of_comparisons():
-    track = {'comparisons': 0}
+    track = {'comparisons': 0, 'copies': 0}
     array = parse_text(text)
     result = merge_sort(array, sort_ascending_while_tracking, track)
     assert result[:20] == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     assert result[-20:] == [9981, 9982, 9983, 9984, 9985, 9986, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995,
                             9996, 9997, 9998, 9999, 10000]
-    assert track['comparisons'] == 120518
+    assert track['comparisons'] == 120473
+    assert track['copies'] == 140472
