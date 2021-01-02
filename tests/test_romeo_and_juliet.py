@@ -2,7 +2,7 @@ import copy
 
 from algs.romeo_and_juliet import RomeoAndJuliet
 
-text = open('C:/programming/workspace/python_algs/tests/txt_files/romeojuliet.txt')
+text = '../txt_files/romeojuliet.txt'
 
 
 def test_rome_and_juliet_parses_text():

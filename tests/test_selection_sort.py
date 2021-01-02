@@ -2,7 +2,7 @@ from algs.bubble_sort import parse_txt_file
 from algs.comparators import sort_in_ascending, sort_in_descending, sort_ascending_while_tracking
 from algs.selection_sort import selection_sort
 
-text = open('../txt_files/sort.txt')
+text = '../txt_files/sort.txt'
 
 
 def test_selection_sort_sorts_a_short_list_ascending():

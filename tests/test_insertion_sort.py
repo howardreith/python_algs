@@ -4,8 +4,9 @@ from algs.bubble_sort import parse_txt_file
 from algs.comparators import sort_in_ascending, sort_in_descending, sort_ascending_while_tracking
 from algs.insertion_sort import insertion_sort_wrong, parse_text, update_score_tracker, print_top_ten, insertion_sort
 
-text = open('../txt_files/super_sport.txt')
-lotsa_numbers = open('../txt_files/to_merge.txt')
+text = '../txt_files/super_sport.txt'
+lotsa_numbers = '../txt_files/to_merge.txt'
+
 
 def test_insertion_sort_sorts_a_short_list_of_numbers():
     array = [5, 3, 7]

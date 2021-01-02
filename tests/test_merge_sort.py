@@ -1,7 +1,7 @@
 from algs.comparators import sort_in_ascending, sort_in_descending, sort_ascending_while_tracking
 from algs.merge_sort import merge_sort, parse_text
 
-text = open('../txt_files/to_merge.txt')
+text = '../txt_files/to_merge.txt'
 
 
 def test_merge_sort_returns_array_of_1():
@@ -35,24 +35,24 @@ def test_merge_sort_sorts_a_short_list_of_strings_descending():
 
 
 def test_merge_sort_performs_one_operation_for_2_item_unsorted_list():
-    track = {'comparisons': 0}
+    track = {'comparisons': 0, 'copies': 0}
     array = [2, 1]
     merge_sort(array, sort_ascending_while_tracking, track)
     assert track['comparisons'] == 1
 
 
-def test_merge_sort_performs_two_operation_for_2_item_unsorted_list():
-    track = {'comparisons': 0}
+def test_merge_sort_performs_three_operation_for_2_item_unsorted_list():
+    track = {'comparisons': 0, 'copies': 0}
     array = [2, 4, 1]
     merge_sort(array, sort_ascending_while_tracking, track)
-    assert track['comparisons'] == 2
+    assert track['comparisons'] == 3
 
 
 def test_merge_sort_performs_many_operation_for_complex_unsorted_list():
-    track = {'comparisons': 0}
+    track = {'comparisons': 0, 'copies': 0}
     array = [6, 3, 9, 4, 1, 10, 11, 7, 2, 8]
     merge_sort(array, sort_ascending_while_tracking, track)
-    assert track['comparisons'] == 22
+    assert track['comparisons'] == 23
 
 
 def test_parse_text_parses_text():
@@ -76,4 +76,4 @@ def test_merge_sort_has_right_number_of_comparisons():
     assert result[-20:] == [9981, 9982, 9983, 9984, 9985, 9986, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995,
                             9996, 9997, 9998, 9999, 10000]
     assert track['comparisons'] == 120473
-    assert track['copies'] == 140472
+    assert track['copies'] == 143616

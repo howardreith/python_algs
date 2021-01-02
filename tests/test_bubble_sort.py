@@ -3,8 +3,8 @@ import random
 from algs.bubble_sort import bubble_sort, parse_txt_file
 from algs.comparators import sort_in_ascending, sort_ascending_while_tracking
 
-text = open('../txt_files/sort.txt')
-lotsa_numbers = open('../txt_files/to_merge.txt')
+text = '../txt_files/sort.txt'
+lotsa_numbers = '../txt_files/to_merge.txt'
 
 def odd_even_comparator(a, b):
     a_is_even = a % 2 == 0

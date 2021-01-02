@@ -9,8 +9,8 @@ def selection_sort(list, strategy, track=None):
                 result = strategy(list[j], list[lowest])
             if result < 0:
                 lowest = j
-        list[i], list[lowest] = list[lowest], list[i]
-        if track:
-            track["copies"] = track["copies"] + 3
-
+        if i != lowest:
+            list[i], list[lowest] = list[lowest], list[i]
+            if track:
+                track["copies"] = track["copies"] + 3
     return list

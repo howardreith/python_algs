@@ -23,6 +23,8 @@ def insertion_sort_wrong(array, sorting_strategy):
 def insertion_sort(array, sorting_strategy, track=None):
     for i in range(1, len(array)):
         current = array[i]
+        if (track):
+            track['copies'] = track['copies'] + 1
         position = i
         for j in reversed(range(i)):
             if track:
@@ -36,20 +38,23 @@ def insertion_sort(array, sorting_strategy, track=None):
                 track['copies'] = track['copies'] + 1
             position = position - 1
         array[position] = current
+        if (track):
+            track['copies'] = track['copies'] + 1
     return array
 
 
-def parse_text(text):
-    lines = text.readlines()
-    players = []
-    for i in range(len(lines)):
-        pair = lines[i].split("\t")
-        pair[1] = pair[1].replace('\n', '')
-        player = {}
-        player['name'] = pair[0]
-        player['score'] = pair[1]
-        players.append(player)
-    return players
+def parse_text(path):
+    with open(path) as text:
+        lines = text.readlines()
+        players = []
+        for i in range(len(lines)):
+            pair = lines[i].split("\t")
+            pair[1] = pair[1].replace('\n', '')
+            player = {}
+            player['name'] = pair[0]
+            player['score'] = pair[1]
+            players.append(player)
+        return players
 
 
 def update_score_tracker(score_tracker, results):

@@ -16,8 +16,9 @@ def bubble_sort(array, sorting_strategy, track=None):
         unsorted_to = unsorted_to - 1
 
 
-def parse_txt_file(text):
-    lines = text.readlines()
-    for i in range(len(lines)):
-        lines[i] = int(lines[i].replace('\n', ''))
-    return lines
+def parse_txt_file(path):
+    with open(path) as text:
+        lines = text.readlines()
+        for i in range(len(lines)):
+            lines[i] = int(lines[i].replace('\n', ''))
+        return lines

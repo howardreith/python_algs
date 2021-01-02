@@ -19,23 +19,24 @@ class RomeoAndJuliet(object):
         self.set = []
         self.parse_text(text)
 
-    def parse_text(self, text):
-        lines = text.readlines()
-        kin_list = []
-        for line in lines:
-            if 'kin' in line:
-                kin_list.insert(0, line)
-        self.kin_list = kin_list
+    def parse_text(self, path):
+        with open(path) as text:
+            lines = text.readlines()
+            kin_list = []
+            for line in lines:
+                if 'kin' in line:
+                    kin_list.insert(0, line)
+            self.kin_list = kin_list
 
-        charList = []
-        for pair in lines:
-            pair = pair.replace('kin', '').replace('knows', '').replace('\n', '').split('\t')
-            while '' in pair:
-                pair.remove('')
-            for char in pair:
-                if char not in charList:
-                    charList.insert(0, char)
-        self.unique_characters = charList
+            charList = []
+            for pair in lines:
+                pair = pair.replace('kin', '').replace('knows', '').replace('\n', '').split('\t')
+                while '' in pair:
+                    pair.remove('')
+                for char in pair:
+                    if char not in charList:
+                        charList.insert(0, char)
+            self.unique_characters = charList
 
     def create_union_finds_for_chars(self):
         disjoint_set = DisjointSet()
