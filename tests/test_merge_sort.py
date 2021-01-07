@@ -76,4 +76,4 @@ def test_merge_sort_has_right_number_of_comparisons():
     assert result[-20:] == [9981, 9982, 9983, 9984, 9985, 9986, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995,
                             9996, 9997, 9998, 9999, 10000]
     assert track['comparisons'] == 120473
-    assert track['copies'] == 143616
+    assert track['copies'] == 133616
