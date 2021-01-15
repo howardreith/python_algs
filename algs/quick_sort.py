@@ -1,46 +1,49 @@
-def quick_sort(array, num_items, sort_strategy, pivot_strategy):
-    if num_items <= 1:
-        return
-
-    pivot = pivot_strategy(num_items)
-    store = array[0]
-    array[0] = array[pivot]
-    array[pivot] = store
-    pivot = partition(array, pivot)
-
-    quick_sort(array[0], pivot, sort_strategy, pivot_strategy)
-    pivot = pivot + 1
-    quick_sort(array[pivot], (num_items - pivot), sort_strategy, pivot_strategy)
+import random
 
 
-def partition(array, num_items):
-    low = 1
-    high = num_items - 1
+def quick_sort(array, start, end, sort_strategy, pivot_strategy, track={'copies': 0, 'comparisons': 0}):
+    if start < end:
+        pivot_point = pivot_strategy(start, end)
+        array[start], array[pivot_point] = array[pivot_point], array[start]
+        track['copies'] = track['copies'] + 3
 
+        pivot = partition(array, start, end, sort_strategy, track)
+        quick_sort(array, start, pivot - 1, sort_strategy, pivot_strategy, track)
+        quick_sort(array, pivot + 1, end, sort_strategy, pivot_strategy, track)
+
+
+def partition(array, start, end, sort_strategy, track={'copies': 0, 'comparisons': 0}):
+    low = start + 1
+    high = end
+    pivot_value = array[start]
     while True:
-        while low < high and array[low] < array[0]:
-            low = low + 1
-
-        while high >= low and array[high] >= array[0]:
-            high = low - 1
+        while low < high and sort_strategy(array[low], pivot_value, track) < 0:
+            low += 1
+        while high >= low and sort_strategy(array[high], pivot_value, track) >= 0:
+            high -= 1
 
         if low >= high:
             break
 
-    store = array[0]
-    array[0] = array[high]
-    array[high] = store
+        array[low], array[high] = array[high], array[low]
+        low += 1
+        high -= 1
+        track['copies'] = track['copies'] + 3
+
+    array[high], array[start] = array[start], array[high]
+    track['copies'] = track['copies'] + 3
     return high
+
+
 # Pivot Strategies
 
-def pivot_on_zero(num_items):
-    return 0
+def pivot_on_zero(start, end):
+    return start
 
 
-def pivot_on_random():
-    return
+def pivot_on_random(start, end):
+    return random.randint(start, end)
 
 
-def swap(a, b):
-    return
-
+def pivot_on_high(start, end):
+    return end - 1
