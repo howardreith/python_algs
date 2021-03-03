@@ -4,7 +4,7 @@ from math import floor
 def merge_sort(array, strategy, track={'copies': 0, 'comparisons': 0}):
     if len(array) == 1:
         return array
-    middle = (len(array) // 2)
+    middle = (len(array) / 2)
     merge_arrays = {'left': [], 'right': []}
 
     merge_arrays['left'] = merge_sort(array[:middle], strategy, track)

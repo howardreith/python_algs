@@ -1,12 +1,20 @@
+import pytest
+
 from algs.heap import Heap
 from algs.running_median import RunningMedian
+
 text = '../txt_files/random_floating_points.txt'
 
+
 def max_priority_function(item1, item2):
+    if item1 is None or item2 is None:
+        return item1 or item2
     return item1 - item2
 
 
 def min_priority_function(item1, item2):
+    if item1 is None or item2 is None:
+        return item1 or item2
     return item2 - item1
 
 
@@ -23,6 +31,19 @@ def test_running_median_finds_running_median_with_heaps_set_up():
     assert result == 5
     result = sut.running_median(min_heap, max_heap, 6)
     assert result == 5.5
+    result = sut.running_median(min_heap, max_heap, 10)
+    assert result == 6
+
+
+def test_running_median_finds_running_median_along_way():
+    min_heap = Heap(10, max_priority_function)
+    max_heap = Heap(10, min_priority_function)
+    new_value = 4
+    sut = RunningMedian()
+    result = sut.running_median(min_heap, max_heap, new_value)
+    assert result == 4
+    result = sut.running_median(min_heap, max_heap, 6)
+    assert result == 5
     result = sut.running_median(min_heap, max_heap, 10)
     assert result == 6
 
@@ -110,4 +131,49 @@ def test_running_median_challenge():
     for float_number in array:
         sum += sut.running_median(min_heap, max_heap, float_number)
     # assert sum == 4995738.755804
-    assert sum == 4995738.755804099
+    assert sum == pytest.approx(4995738.755804, .000001)
+
+
+def test_maintain_sliding_window_reduces_size_appropriately():
+    sut = RunningMedian()
+    array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    min_heap = Heap(10, max_priority_function)
+    max_heap = Heap(10, min_priority_function)
+    for i in range(5):
+        min_heap.insert(array[i])
+        max_heap.insert(array[i + 5])
+    sut.maintain_sliding_window(min_heap, max_heap, array, 11, 10)
+    assert array[0] == 2
+    assert len(array) == 10
+    assert array[-1] != 10
+
+
+def test_running_media_with_sliding_window_behaves_appropriately_with_challenge():
+    sut = RunningMedian()
+    array = sut.parse_text_file(text)
+    min_heap = Heap(10, max_priority_function)
+    max_heap = Heap(10, min_priority_function)
+    sum = 0
+    window = []
+    for float_number in array:
+        sum += sut.running_median_with_sliding_window(min_heap, max_heap, float_number, window, 100)
+    expected_result = 4995205.397700
+    assert sum == expected_result
+
+
+def test_running_media_with_sliding_window_behaves_appropriately_with_challenge():
+    min_heap = Heap(10, max_priority_function)
+    max_heap = Heap(10, min_priority_function)
+    window = []
+    new_value = 4
+    sut = RunningMedian()
+    result = sut.running_median_with_sliding_window(min_heap, max_heap, new_value, window, 3)
+    assert result == 4
+    result = sut.running_median_with_sliding_window(min_heap, max_heap, 6, window, 3)
+    assert result == 5
+    result = sut.running_median_with_sliding_window(min_heap, max_heap, 10, window, 3)
+    assert result == 6
+    result = sut.running_median_with_sliding_window(min_heap, max_heap, 1, window, 3)
+    assert result == 6
+    result = sut.running_median_with_sliding_window(min_heap, max_heap, 11, window, 3)
+    assert result == 10
