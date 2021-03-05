@@ -7,31 +7,31 @@ class Heap(object):
         self.size = size
         self.items = [None] * size
         self.priorityFunction = priority_function
-        self.lastItemIndex = 0
+        self.lastItemIndex = -1
 
     def insert(self, item):
-        if self.lastItemIndex == self.size:
+        if self.lastItemIndex + 1 == self.size:
             self.expand()
+        self.lastItemIndex += 1
         self.items[self.lastItemIndex] = item
         bubble_up_index = self.lastItemIndex
-        self.lastItemIndex += 1
         self.bubble_up(bubble_up_index)
 
     def extract(self):
-        if self.lastItemIndex == 0:
+        if self.lastItemIndex == -1:
             raise Exception('Stack underflow')
         return_value = self.items[0]
-        self.lastItemIndex = self.lastItemIndex - 1
         self.items[0] = self.items[self.lastItemIndex]
-        bubble_down_index = 0
-        self.bubble_down(bubble_down_index)
+        self.items[self.lastItemIndex] = None
+        self.lastItemIndex = self.lastItemIndex - 1
+        self.bubble_down(0)
         return return_value
 
     def peek(self):
         return self.items[0]
 
     def get_size(self):
-        return self.lastItemIndex
+        return self.lastItemIndex + 1
 
     def expand(self):
         if self.size == 0:
@@ -46,12 +46,14 @@ class Heap(object):
         if value not in self.items:
             raise Exception('Value not in heap')
         index = self.items.index(value)
-        del self.items[index]
-        self.items.append(None)
+        self.items[index] = self.items[self.lastItemIndex]
+        self.items[self.lastItemIndex] = None
         self.lastItemIndex = self.lastItemIndex - 1
         self.reprioritize(index)
 
     def bubble_up(self, index):
+        if index > self.lastItemIndex:
+            return
         while index != 0:
             parent_index = self.get_parent_index(index)
             if self.priorityFunction(self.items[index], self.items[parent_index]) <= 0:
@@ -60,8 +62,7 @@ class Heap(object):
             index = parent_index
 
     def bubble_down(self, index):
-        # Investigate if you need a -1 after the self.lastItemIndex
-        while self.get_child_index(index) < self.lastItemIndex:
+        while self.get_child_index(index) <= self.lastItemIndex:
             child_index = self.get_child_index(index)
             child_index = self.find_greatest_priority(child_index, child_index + 1)
             if self.priorityFunction(self.items[index], self.items[child_index]) >= 0:
@@ -70,7 +71,11 @@ class Heap(object):
             index = child_index
 
     def find_greatest_priority(self, x, y):
-        if self.priorityFunction(self.items[x], self.items[y]) >= 0:
+        if y > self.lastItemIndex:
+            return x
+        elif x > self.lastItemIndex:
+            return y
+        elif self.priorityFunction(self.items[x], self.items[y]) >= 0:
             return x
         return y
 
@@ -102,3 +107,6 @@ class Heap(object):
         index = index + 1
         index = index << 1
         return index - 1
+
+# Add heap is valid function - validate that everything along the tree is appropriate
+# Array is size it should be etc.

@@ -130,7 +130,6 @@ def test_running_median_challenge():
     sum = 0
     for float_number in array:
         sum += sut.running_median(min_heap, max_heap, float_number)
-    # assert sum == 4995738.755804
     assert sum == pytest.approx(4995738.755804, .000001)
 
 
@@ -158,10 +157,10 @@ def test_running_media_with_sliding_window_behaves_appropriately_with_challenge(
     for float_number in array:
         sum += sut.running_median_with_sliding_window(min_heap, max_heap, float_number, window, 100)
     expected_result = 4995205.397700
-    assert sum == expected_result
+    assert sum == pytest.approx(expected_result, 0.0001)
 
 
-def test_running_media_with_sliding_window_behaves_appropriately_with_challenge():
+def test_running_media_with_sliding_window_works_with_individual_additions():
     min_heap = Heap(10, max_priority_function)
     max_heap = Heap(10, min_priority_function)
     window = []
@@ -177,3 +176,5 @@ def test_running_media_with_sliding_window_behaves_appropriately_with_challenge(
     assert result == 6
     result = sut.running_median_with_sliding_window(min_heap, max_heap, 11, window, 3)
     assert result == 10
+    result = sut.running_median_with_sliding_window(min_heap, max_heap, 2, window, 3)
+    assert result == 2

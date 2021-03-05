@@ -40,6 +40,14 @@ class RunningMedian(object):
         else:
             return abs(min_heap_size - max_heap_size) == 1
 
+    def parse_text_file(self, path):
+        with open(path) as text:
+            lines = text.readlines()
+            for i in range(len(lines)):
+                lines[i] = lines[i].replace('\n', '')
+                lines[i] = float(lines[i])
+            return lines
+
     def maintain_sliding_window(self, min_heap, max_heap, window, value, max_sliding_window=100):
         window.append(value)
         if len(window) <= max_sliding_window:
@@ -51,18 +59,10 @@ class RunningMedian(object):
             min_heap.delete(to_remove)
         del window[0]
 
-    def parse_text_file(self, path):
-        with open(path) as text:
-            lines = text.readlines()
-            for i in range(len(lines)):
-                lines[i] = lines[i].replace('\n', '')
-                lines[i] = float(lines[i])
-            return lines
-
     def running_median_with_sliding_window(self, min_heap, max_heap, value, window, max_sliding_window=100):
-        if min_heap.peek() == None:
+        if min_heap.peek() is None:
             min_heap.insert(value)
-        elif max_heap.peek() == None and value > min_heap.peek():
+        elif max_heap.peek() is None and value > min_heap.peek():
             max_heap.insert(value)
         elif value <= min_heap.peek():
             min_heap.insert(value)

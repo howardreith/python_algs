@@ -1,6 +1,7 @@
 import pytest
 
 from algs.heap import Heap, default_priority_function
+from tests.test_running_median import min_priority_function, max_priority_function
 
 
 def test_heap_can_be_created_with_proper_parameters():
@@ -74,6 +75,17 @@ def test_extract_and_insert_alternating_returns_values():
     heap.insert(10)
     heap.insert(1)
     assert heap.get_size() == 4
+
+
+def test_heap_extract_returns_the_proper_number_when_it_is_the_last():
+    min_heap = Heap(10, max_priority_function)
+
+    min_heap.insert(1)
+    min_heap.insert(3)
+    min_heap.insert(2)
+    min_heap.insert(4)
+    result = min_heap.extract()
+    assert result == 4
 
 
 def test_heap_behaves_correctly_with_duplicate_values():
