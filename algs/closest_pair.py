@@ -4,7 +4,7 @@ from operator import itemgetter
 
 class ClosestPair(object):
     def closest_pair_1d_brute_force(self, array):
-        closest_distance = 9999999
+        closest_distance = math.inf
 
         for p1 in array:
             for p2 in array:
@@ -29,14 +29,14 @@ class ClosestPair(object):
         return min([left_closest_distance, right_closest_distance, split_closest_distance])
 
     def distance(self, p1, p2):
-        return math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+        return {'p1': p1, 'p2': p2, 'distance': math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)}
 
     def closest_pair_2d_brute_force(self, array):
         closest_distance = self.distance(array[0], array[1])
 
         for p1 in array:
             for p2 in array:
-                if p1 != p2 and self.distance(p1, p2) < closest_distance:
+                if p1 != p2 and self.distance(p1, p2)['distance'] < closest_distance['distance']:
                     closest_distance = self.distance(p1, p2)
 
         return closest_distance
@@ -71,21 +71,23 @@ class ClosestPair(object):
 
         left_closest_distance = self.closest_pair_2d_recursive(left_x, left_y)
         right_closest_distance = self.closest_pair_2d_recursive(right_x, right_y)
-        closest_distance = min([left_closest_distance, right_closest_distance])
+        if left_closest_distance['distance'] < right_closest_distance['distance']:
+            closest_distance = left_closest_distance
+        else:
+            closest_distance = right_closest_distance
 
         # Create strip
         strip = []
         for pair_of_coords in array_y:
-            if abs(pair_of_coords[0] - divide) < closest_distance:
+            if abs(pair_of_coords[0] - divide) < closest_distance['distance']:
                 strip.append(pair_of_coords)
 
         # Compare points in strip to points within closest distance below it
-        return_value = {}
         for i in range(len(strip)):
             j = i + 1
-            while j < len(strip) and (strip[j][1] - strip[i][1]) < closest_distance:
+            while j < len(strip) and (strip[j][1] - strip[i][1]) < closest_distance['distance']:
                 distance = self.distance(strip[i], strip[j])
-                if distance < closest_distance:
+                if distance['distance'] < closest_distance['distance']:
                     closest_distance = distance
                 j = j + 1
 
@@ -103,12 +105,10 @@ class ClosestPair(object):
                 lines[i] = point
         return lines
 
-
     def closest_pair_2d_divide_conquer_allow_duplicate_x(self, array):
         array_x = self.sort_list_of_lists_by_n_index(array, 0)
         array_y = self.sort_list_of_lists_by_n_index(array, 1)
         return self.closest_pair_2d_recursive_allow_duplicate_x(array_x, array_y)
-
 
     def closest_pair_2d_recursive_allow_duplicate_x(self, array_x, array_y):
         n = len(array_x)
@@ -135,23 +135,25 @@ class ClosestPair(object):
             else:
                 right_y.append(pair_of_coords)
 
-        left_closest_distance = self.closest_pair_2d_recursive(left_x, left_y)
-        right_closest_distance = self.closest_pair_2d_recursive(right_x, right_y)
-        closest_distance = min([left_closest_distance, right_closest_distance])
+        left_closest_distance = self.closest_pair_2d_recursive_allow_duplicate_x(left_x, left_y)
+        right_closest_distance = self.closest_pair_2d_recursive_allow_duplicate_x(right_x, right_y)
+        if left_closest_distance['distance'] < right_closest_distance['distance']:
+            closest_distance = left_closest_distance
+        else:
+            closest_distance = right_closest_distance
 
         # Create strip
         strip = []
         for pair_of_coords in array_y:
-            if abs(pair_of_coords[0] - divide[0]) < closest_distance:
+            if abs(pair_of_coords[0] - divide[0]) < closest_distance['distance']:
                 strip.append(pair_of_coords)
 
         # Compare points in strip to points within closest distance below it
-        return_value = {}
         for i in range(len(strip)):
             j = i + 1
-            while j < len(strip) and (strip[j][1] - strip[i][1]) < closest_distance:
+            while j < len(strip) and (strip[j][1] - strip[i][1]) < closest_distance['distance']:
                 distance = self.distance(strip[i], strip[j])
-                if distance < closest_distance:
+                if distance['distance'] < closest_distance['distance']:
                     closest_distance = distance
                 j = j + 1
 

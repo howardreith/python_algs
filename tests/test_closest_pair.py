@@ -40,16 +40,18 @@ def test_closest_pair_1d_divide_conquer_finds_closest_pair():
     assert result == 3
 
 
-def test_distance_returns_the_hypotneuse():
+def test_distance_returns_the_hypotenuse():
     sut = ClosestPair()
     point1 = [2, 3]
     point2 = [-3, -3]
     result = sut.distance(point1, point2)
-    assert result == pytest.approx(7.81, 0.1)
+    assert result['distance'] == pytest.approx(7.81, 0.1)
+    assert result['p1'] == point1
+    assert result['p2'] == point2
     point3 = [0, 0]
     point4 = [3, 4]
     result = sut.distance(point3, point4)
-    assert result == 5
+    assert result['distance'] == 5
 
 
 def test_sort_list_of_lists_by_n_index_sorts_list_by_1():
@@ -70,14 +72,18 @@ def test_closest_pair_brute_force_2d_finds_closest_pair():
     sut = ClosestPair()
     array = [[0, 0], [1, 1], [5, 4], [-5, 3], [-10, -10]]
     result = sut.closest_pair_2d_brute_force(array)
-    assert result == pytest.approx(1.41, 0.1)
+    assert result['distance'] == pytest.approx(1.41, 0.1)
+    assert result['p1'] == array[0]
+    assert result['p2'] == array[1]
 
 
 def test_closest_pair_2d_divide_conquer_finds_closest_distance():
     sut = ClosestPair()
     array = [[0, 0], [1, 1], [5, 4], [-5, 3], [-10, -10]]
     result = sut.closest_pair_2d_divide_conquer(array)
-    assert result == pytest.approx(1.41, 0.1)
+    assert result['distance'] == pytest.approx(1.41, 0.1)
+    assert result['p1'] == array[0]
+    assert result['p2'] == array[1]
 
 
 def test_parse_text_file_parses_text_file():
@@ -91,11 +97,23 @@ def test_closest_pair_2d_finds_closest_pair_in_challenge():
     sut = ClosestPair()
     array = sut.parse_text_file(text)
     result = sut.closest_pair_2d_divide_conquer(array)
-    assert result == pytest.approx(0.068070, 0.00001)
-
+    assert result['distance'] == pytest.approx(0.068070, 0.00001)
+    assert result['p1'] == [38523.97799, -33081.309257]
+    assert result['p2'] == [38524.043694, -33081.291468]
 
 def test_closest_pair_2d_allow_duplicate_x_finds_closest_pair():
     sut = ClosestPair()
     array = [[0, 0], [1, 1], [5, 4], [-5, 3], [-10, -10]]
     result = sut.closest_pair_2d_divide_conquer_allow_duplicate_x(array)
-    assert result == pytest.approx(1.41, 0.1)
+    assert result['distance'] == pytest.approx(1.41, 0.1)
+    assert result['p1'] == array[0]
+    assert result['p2'] == array[1]
+
+
+def test_closest_pair_2d_allow_duplicate_x_finds_closest_pair_in_challenge():
+    sut = ClosestPair()
+    array = sut.parse_text_file(text)
+    result = sut.closest_pair_2d_divide_conquer_allow_duplicate_x(array)
+    assert result['distance'] == pytest.approx(0.068070, 0.00001)
+    assert result['p1'] == [38523.97799, -33081.309257]
+    assert result['p2'] == [38524.043694, -33081.291468]
