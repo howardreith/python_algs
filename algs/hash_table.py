@@ -2,6 +2,7 @@ import math
 
 A = 0.6180339887
 
+
 class HashTable(object):
     def __init__(self, size, hash_function):
         self.max_size = size + 100
@@ -54,12 +55,12 @@ class HashTable(object):
             for i, dict in enumerate(bucket, start=0):
                 if key in dict:
                     key_value_pair_index = i
-            del(bucket[key_value_pair_index])
+            del (bucket[key_value_pair_index])
 
     @staticmethod
     def get_key_value_pair_index_from_list(key, bucket):
         key_value_pair_index = len(bucket)
-        for i, dict in enumerate(bucket, start=0):
-            if key in dict:
+        for i, dictionary in enumerate(bucket, start=0):
+            if key in dictionary:
                 key_value_pair_index = i
         return key_value_pair_index

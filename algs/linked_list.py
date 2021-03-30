@@ -50,7 +50,6 @@ class LinkedList(object):
 
         raise Exception('Index out of bounds')
 
-
     def delete(self, target_index):
         store = self.get_head()
 
@@ -66,11 +65,11 @@ class LinkedList(object):
             index += 1
 
         if index == target_index:
-            theNext = store.get_next()
+            the_next = store.get_next()
             previous = store.get_previous()
-            if theNext:
-                theNext.set_previous(previous)
-                previous.set_next(theNext)
+            if the_next:
+                the_next.set_previous(previous)
+                previous.set_next(the_next)
             else:
                 previous.set_next(None)
             return

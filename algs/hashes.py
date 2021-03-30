@@ -1,8 +1,8 @@
 def hash_djb2(s):
-    hash = 5381
+    my_hash = 5381
     for x in s:
-        hash = (( hash << 5) + hash) + ord(x)
-    return hash & 0xFFFFFFFF
+        my_hash = ((my_hash << 5) + my_hash) + ord(x)
+    return my_hash & 0xFFFFFFFF
 
 
 def ord_hash(string, table_size):

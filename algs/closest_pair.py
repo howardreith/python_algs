@@ -28,7 +28,8 @@ class ClosestPair(object):
         split_closest_distance = abs(array[mid] - array[mid - 1])
         return min([left_closest_distance, right_closest_distance, split_closest_distance])
 
-    def distance(self, p1, p2):
+    @staticmethod
+    def distance(p1, p2):
         return {'p1': p1, 'p2': p2, 'distance': math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)}
 
     def closest_pair_2d_brute_force(self, array):
@@ -41,7 +42,8 @@ class ClosestPair(object):
 
         return closest_distance
 
-    def sort_list_of_lists_by_n_index(self, array, n):
+    @staticmethod
+    def sort_list_of_lists_by_n_index(array, n):
         return sorted(array, key=itemgetter(n))
 
     def closest_pair_2d_divide_conquer(self, array):
@@ -93,7 +95,8 @@ class ClosestPair(object):
 
         return closest_distance
 
-    def parse_text_file(self, path):
+    @staticmethod
+    def parse_text_file(path):
         with open(path) as text:
             lines = text.readlines()
             for i in range(len(lines)):

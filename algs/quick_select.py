@@ -1,10 +1,6 @@
 import random
 
 
-from algs.comparators import sort_in_descending
-from algs.quick_sort import quick_sort, pivot_on_zero
-
-
 def quick_select(array, left, right, desired, sort_strategy):
     if right == left:
         return array[right]

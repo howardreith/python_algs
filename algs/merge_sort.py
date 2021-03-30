@@ -1,6 +1,3 @@
-from math import floor
-
-
 def merge_sort(array, strategy, track={'copies': 0, 'comparisons': 0}):
     if len(array) == 1:
         return array

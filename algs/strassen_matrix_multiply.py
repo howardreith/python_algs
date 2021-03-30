@@ -1,5 +1,6 @@
 import random
 
+
 class MatrixMultiplication(object):
 
     def recursive_matrix_multiply(self, n, first, second):
@@ -16,7 +17,6 @@ class MatrixMultiplication(object):
         q4 = self.add_matrices(self.recursive_matrix_multiply(half, c, f), self.recursive_matrix_multiply(half, d, h))
 
         return self.join_quads_into_matrix(q1, q2, q3, q4)
-
 
     def strassen_matrix_multiply(self, n, first, second):
         if n <= 16:
@@ -44,9 +44,7 @@ class MatrixMultiplication(object):
         q4 = self.subtract_matrices(q4, p3)
         q4 = self.subtract_matrices(q4, p7)
 
-
         return self.join_quads_into_matrix(q1, q2, q3, q4)
-
 
     def naive_matrix_multiply(self, n, a, b):
         matrix = self.create_square_matrix(n)
@@ -57,13 +55,15 @@ class MatrixMultiplication(object):
 
         return matrix
 
-    def create_square_matrix(self, n):
+    @staticmethod
+    def create_square_matrix(n):
         val = [0] * n
         for x in range(n):
             val[x] = [0] * n
         return val
 
-    def create_random_square_matrix(self, n):
+    @staticmethod
+    def create_random_square_matrix(n):
         val = [0] * n
         for x in range(n):
             val[x] = [0] * n
@@ -102,7 +102,8 @@ class MatrixMultiplication(object):
 
         return matrix
 
-    def parse_matrix_text(self, path):
+    @staticmethod
+    def parse_matrix_text(path):
         array = []
         with open(path) as text:
             lines = text.readlines()
@@ -123,6 +124,5 @@ class MatrixMultiplication(object):
     @staticmethod
     def subtract_matrices(a, b):
         return [[a[i][j] - b[i][j] for j in range(len(a[0]))] for i in range(len(a))]
-
 
 # Profiling stuff https://www.machinelearningplus.com/python/cprofile-how-to-profile-your-python-code/

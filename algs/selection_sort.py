@@ -1,16 +1,16 @@
-def selection_sort(list, strategy, track=None):
-    for i in range(len(list) - 1):
+def selection_sort(input_list, strategy, track=None):
+    for i in range(len(input_list) - 1):
         lowest = i
 
-        for j in range(i + 1, len(list)):
+        for j in range(i + 1, len(input_list)):
             if track:
-                result = strategy(list[j], list[lowest], track)
+                result = strategy(input_list[j], input_list[lowest], track)
             else:
-                result = strategy(list[j], list[lowest])
+                result = strategy(input_list[j], input_list[lowest])
             if result < 0:
                 lowest = j
         if i != lowest:
-            list[i], list[lowest] = list[lowest], list[i]
+            input_list[i], input_list[lowest] = input_list[lowest], input_list[i]
             if track:
                 track["copies"] = track["copies"] + 3
-    return list
+    return input_list
